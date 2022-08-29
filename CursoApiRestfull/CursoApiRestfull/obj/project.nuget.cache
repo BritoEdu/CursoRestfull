@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "k2YthSWYNeVkJ+5fPFOFnXGMQ/KWgS0Fyk7fplx44U1E6c6mL31wPyrkAFt/0eP/zmRTslqivq1ivEIx/JUw4w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\brito\\source\\repos\\CursoApiRestfull\\CursoRestfull\\CursoApiRestfull\\CursoApiRestfull\\CursoApiRestfull.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\brito\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\brito\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\brito\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\brito\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\brito\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\brito\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursoApiRestfull", "CursoApiRestfull\CursoApiRestfull.csproj", "{6DA04B8A-A50C-4371-B736-F65E1570042D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DA04B8A-A50C-4371-B736-F65E1570042D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DA04B8A-A50C-4371-B736-F65E1570042D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DA04B8A-A50C-4371-B736-F65E1570042D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DA04B8A-A50C-4371-B736-F65E1570042D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
