@@ -1,125 +1,44 @@
+using CursoApiRestfull.Model;
+using CursoApiRestfull.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CursoApiRestfull.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CalculadoraController : ControllerBase
+    public class PersonController : ControllerBase
     {
 
-        private readonly ILogger<CalculadoraController> _logger;
-        public CalculadoraController(ILogger<CalculadoraController> logger)
+        private readonly ILogger<PersonController> _logger;
+        private IPersonService _personService;
+        public PersonController(ILogger<PersonController> logger, IPersonService personService)
         {
             _logger = logger;
+            _personService = personService;
         }
 
-        [HttpGet("soma/{firstNumber}/{secondNumber}")]
-        public IActionResult Soma(string firstNumber, string secondNumber)
+        [HttpGet]
+        public IActionResult Get()
         {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            return Ok(_personService.FindAll());
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(long Id)
+        {
+            var person = _personService.FindById(Id);   
+            if(person == null)
             {
-                var sum = ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber);
-
-                return Ok(sum.ToString());
+                return NotFound();
             }
-
-            return BadRequest("Dados inválidos");
-
+            return Ok();
         }
 
-        private decimal ConvertToDecimal(string strNumber)
+        [HttpPost]
+        public IActionResult Post([FromBody] Person person)
         {
-            decimal decimalValue;
-
-            if (decimal.TryParse(strNumber, out decimalValue))
-            {
-                return decimalValue;
-            }
-
-            return 0;
-        }
-
-        private bool IsNumeric(string strNumber)
-        {
-            double number;
-            bool isNumber = double.TryParse(
-                strNumber,
-                System.Globalization.NumberStyles.Any,
-                System.Globalization.NumberFormatInfo.InvariantInfo,
-                out number);
-            return isNumber;
-        }
-
-
-
-        [HttpGet("subtracao/{firstNumber}/{secondNumber}")]
-        public IActionResult Subtracao(string firstNumber, string secondNumber)
-        {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
-            {
-                var sum = ConvertToDecimal(firstNumber) - ConvertToDecimal(secondNumber);
-
-                return Ok(sum.ToString());
-            }
-
-            return BadRequest("Dados inválidos");
-
-        }
-
-        [HttpGet("multiplicacao/{firstNumber}/{secondNumber}")]
-        public IActionResult Multiplicacao(string firstNumber, string secondNumber)
-        {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
-            {
-                var sum = ConvertToDecimal(firstNumber) * ConvertToDecimal(secondNumber);
-
-                return Ok(sum.ToString());
-            }
-
-            return BadRequest("Dados inválidos");
-
-        }
-
-        [HttpGet("divisao/{firstNumber}/{secondNumber}")]
-        public IActionResult Divisao(string firstNumber, string secondNumber)
-        {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
-            {
-                var sum = ConvertToDecimal(firstNumber) / ConvertToDecimal(secondNumber);
-
-                return Ok(sum.ToString());
-            }
-
-            return BadRequest("Dados inválidos");
-
-        }
-
-        [HttpGet("media/{firstNumber}/{secondNumber}")]
-        public IActionResult Media(string firstNumber, string secondNumber)
-        {
-            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
-            {
-                var sum = ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber)/2;
-
-                return Ok(sum.ToString());
-            }
-
-            return BadRequest("Dados inválidos");
-
-        }
-
-        [HttpGet("raizQuadrada/{firstNumber}")]
-        public IActionResult RaizQuadrada(string firstNumber)
-        {
-            if (IsNumeric(firstNumber))
-            {
-                var sum = Math.Sqrt((double)ConvertToDecimal(firstNumber));
-
-                return Ok(sum.ToString());
-            }
-
-            return BadRequest("Dados inválidos");
-
+            if (person == null) return BadRequest();
+            return Ok(_personService.Create(person));
         }
 
 
