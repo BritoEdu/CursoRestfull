@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CursoApiRestfull.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PersonController : ControllerBase
     {
 
@@ -31,7 +31,7 @@ namespace CursoApiRestfull.Controllers
             {
                 return NotFound();
             }
-            return Ok();
+            return Ok(person);
         }
 
         [HttpPost]
@@ -41,6 +41,18 @@ namespace CursoApiRestfull.Controllers
             return Ok(_personService.Create(person));
         }
 
+        [HttpPut]
+        public IActionResult Put([FromBody] Person person)
+        {
+            if (person == null) return BadRequest();
+            return Ok(_personService.Update(person));
+        }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long Id)
+        {
+            _personService.Delete(Id);
+            return NoContent();
+        }
     }
 }

@@ -1,64 +1,89 @@
 ﻿using CursoApiRestfull.Model;
+using CursoApiRestfull.Model.Context;
 
 namespace CursoApiRestfull.Services.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
-        private int count;
+        private SqlContext _sqlContext;
 
+
+        public PersonServiceImplementation(SqlContext sqlContext)
+        {
+            _sqlContext = sqlContext;
+        }
         public Person Create(Person person)
         {
+            try
+            {
+                _sqlContext.Persons.Add(person);
+                _sqlContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             return person;
         }
 
         public void Delete(long Id)
         {
+            try
+            {
+                var person = _sqlContext.Persons.Where(d => d.Id == Id).FirstOrDefault();
+                _sqlContext.Remove(person);
+                _sqlContext.SaveChanges();
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }
 
         public List<Person> FindAll()
         {
-            var pessoas = new List<Person>();
-            for (int i = 0; i < 8; i++)
+            try
             {
-                Person person = MockPerson(i);
+                return _sqlContext.Persons.ToList();
             }
-            return pessoas;
+            catch (Exception)
+            {
+                throw;
+            }
         }
-
-
 
         public Person FindById(long Id)
         {
             var pessoa = new Person();
-            pessoa.Id = 1;
-            pessoa.Nome = "Eduardo";
-            pessoa.Sobrenome = "Brito";
-            pessoa.Endereço = "São Paulo";
-            pessoa.Genero = "Masculino";
+            try
+            {
+                pessoa = _sqlContext.Persons.SingleOrDefault(d => d.Id.Equals(Id));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
             return pessoa;
         }
 
         public Person Update(Person person)
         {
+            try
+            {
+                _sqlContext.Persons.Update(person);
+                _sqlContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             return person;
         }
-
-        private Person MockPerson(int i)
-        {
-            return new Person
-            {
-                Id = IncrementAndGet(),
-                Nome = "Nome"+i,
-                Sobrenome = "Eduardo" + i,
-                Endereço = "Endereço" + i,
-                Genero = "Genero"
-            };
-        }
-        public long IncrementAndGet()
-        {
-            return Interlocked.Increment(ref count);
-        }
-
     }
 }
