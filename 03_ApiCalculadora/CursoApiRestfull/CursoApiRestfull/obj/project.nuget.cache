@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "AbQ5chhmq1BF+XXymBoIHfSwHhvvIDXQ4dqWvtaPWQGk9RlxJRC6PhtOIPKntQdQjtutHM16xAYFYJUyOGCgKQ==",
+  "dgSpecHash": "LfdiOdFsmwDnBY+8lx6XhTpZtOE/IcKDgC/PYDsgv7HQ4voDRYNluNt3+p4puzvMJrhTg0OLODVsju/cbCUyGw==",
   "success": true,
   "projectFilePath": "C:\\Users\\brito\\source\\repos\\CursoApiRestfull\\CursoRestfull\\03_ApiCalculadora\\CursoApiRestfull\\CursoApiRestfull\\CursoApiRestfull.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\brito\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\brito\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.0.0\\microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
     "C:\\Users\\brito\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\brito\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\brito\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",

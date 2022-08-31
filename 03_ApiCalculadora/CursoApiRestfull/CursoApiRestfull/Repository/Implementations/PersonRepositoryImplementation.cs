@@ -1,14 +1,14 @@
 ﻿using CursoApiRestfull.Model;
 using CursoApiRestfull.Model.Context;
 
-namespace CursoApiRestfull.Services.Implementations
+namespace CursoApiRestfull.Repository.Implementations
 {
-    public class PersonServiceImplementation : IPersonService
+    public class PersonRepositoryImplementation : IPersonRepository
     {
         private SqlContext _sqlContext;
 
 
-        public PersonServiceImplementation(SqlContext sqlContext)
+        public PersonRepositoryImplementation(SqlContext sqlContext)
         {
             _sqlContext = sqlContext;
         }
@@ -84,6 +84,11 @@ namespace CursoApiRestfull.Services.Implementations
             }
 
             return person;
+        }
+
+        public bool Exists(long Id)
+        {
+            return _sqlContext.Persons.Any(d => d.Id == Id);    
         }
     }
 }
