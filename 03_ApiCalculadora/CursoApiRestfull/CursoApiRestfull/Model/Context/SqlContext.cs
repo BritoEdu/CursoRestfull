@@ -9,5 +9,6 @@ namespace CursoApiRestfull.Model.Context
          
         }
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Livro> Livros { get; set; }
     }
 }

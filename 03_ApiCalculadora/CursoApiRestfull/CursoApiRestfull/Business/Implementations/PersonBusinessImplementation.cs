@@ -1,21 +1,26 @@
-﻿using CursoApiRestfull.Model;
-using CursoApiRestfull.Model.Context;
-using CursoApiRestfull.Repository;
+﻿using CursoApiRestfull.Data.Converter.Implementation;
+using CursoApiRestfull.Data.VO;
+using CursoApiRestfull.Model;
+using CursoApiRestfull.Repository.Generic;
 
 namespace CursoApiRestfull.Business.Implementations
 {
     public class PersonBusinessImplementation : IPersonBusiness
     {
-        private readonly IPersonRepository _repository;
+        private readonly IRepository<Person> _repository;
+        private readonly PersonConverter _converter;
 
 
-        public PersonBusinessImplementation(IPersonRepository repository)
+        public PersonBusinessImplementation(IRepository<Person> repository)
         {
             _repository = repository;
+            _converter = new PersonConverter();
         }
-        public Person Create(Person person)
+        public PersonVO Create(PersonVO person)
         {
-            return _repository.Create(person);
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Create(personEntity);
+            return _converter.Parse(personEntity);  
         }
 
         public void Delete(long Id)
@@ -23,11 +28,11 @@ namespace CursoApiRestfull.Business.Implementations
            _repository.Delete(Id);  
         }
 
-        public List<Person> FindAll()
+        public List<PersonVO> FindAll()
         {
             try
             {
-                return _repository.FindAll();
+                return _converter.Parse(_repository.FindAll());
             }
             catch (Exception)
             {
@@ -35,24 +40,26 @@ namespace CursoApiRestfull.Business.Implementations
             }
         }
 
-        public Person FindById(long Id)
+        public PersonVO FindById(long Id)
         {
-            var pessoa = new Person();
+            var person = new PersonVO();
             try
             {
-                pessoa = _repository.FindById(Id);  
+                person = _converter.Parse(_repository.FindById(Id));  
             }
             catch (Exception)
             {
                 throw;
             }
 
-            return pessoa;
+            return person;
         }
 
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {
-            return _repository.Update(person);
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Update(personEntity);
+            return _converter.Parse(personEntity);
         }
     }
 }

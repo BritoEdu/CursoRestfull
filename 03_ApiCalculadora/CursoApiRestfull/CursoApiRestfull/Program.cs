@@ -1,9 +1,8 @@
 using CursoApiRestfull.Model.Context;
 using Microsoft.EntityFrameworkCore;
-using CursoApiRestfull.Repository;
-using CursoApiRestfull.Repository.Implementations;
 using CursoApiRestfull.Business.Implementations;
 using CursoApiRestfull.Business;
+using CursoApiRestfull.Repository.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +15,11 @@ builder.Services.AddDbContext<SqlContext>(options => options
 builder.Services.AddApiVersioning();    
 //var connection =  Configuration["SqlConection: SqlConectionString"];
 
-builder.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
+//builder.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
 builder.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
+builder.Services.AddScoped<ILivroBusiness, LivroBusinessImplementation>();
+//builder.Services.AddScoped<ILivroRepository, LivroRepositoryImplementation>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 var app = builder.Build();
 

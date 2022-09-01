@@ -1,5 +1,5 @@
 using CursoApiRestfull.Business;
-using CursoApiRestfull.Model;
+using CursoApiRestfull.Data.VO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CursoApiRestfull.Controllers
@@ -9,7 +9,6 @@ namespace CursoApiRestfull.Controllers
     [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {
-
         private readonly ILogger<PersonController> _logger;
         private IPersonBusiness _personBusiness;
         public PersonController(ILogger<PersonController> logger, IPersonBusiness personBusiness)
@@ -36,14 +35,14 @@ namespace CursoApiRestfull.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Create(person));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Update(person));

@@ -1,8 +1,9 @@
-﻿namespace CursoApiRestfull.Model
+﻿using CursoApiRestfull.Model.Base;
+
+namespace CursoApiRestfull.Model
 {
-    public class Person
+    public class Person : BaseEntity
     {
-        public long Id { get; set; }
         public string Nome { get; set; } 
         public string Sobrenome { get; set; }
         public string Endereço { get; set; }
