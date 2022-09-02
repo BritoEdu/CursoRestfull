@@ -1,4 +1,5 @@
 ﻿using CursoApiRestfull.Business;
+using CursoApiRestfull.Hypermedia.Filters;
 using CursoApiRestfull.Model;
 using CursoApiRestfull.Repository;
 using CursoApiRestfull.Repository.Generic;
@@ -19,12 +20,14 @@ namespace CursoApiRestfull.Controllers
             _iLivrosRepository = iLivrosRepository;
         }
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_iLivrosRepository.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long Id)
         {
             var livro = _iLivrosRepository.FindById(Id);
@@ -36,6 +39,7 @@ namespace CursoApiRestfull.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] LivroVO livro)
         {
             if (livro == null) return BadRequest();
@@ -43,6 +47,7 @@ namespace CursoApiRestfull.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] LivroVO livro)
         {
             if (livro == null) return BadRequest();

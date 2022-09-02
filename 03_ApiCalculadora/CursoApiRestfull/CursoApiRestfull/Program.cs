@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using CursoApiRestfull.Business.Implementations;
 using CursoApiRestfull.Business;
 using CursoApiRestfull.Repository.Generic;
+using CursoApiRestfull.Hypermedia.Enricher;
+using CursoApiRestfull.Hypermedia.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<SqlContext>(options => options
 .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=CursoApiRestfull;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+
+var filterOptions = new HyperMediaFilterOptions();
+filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+//filterOptions.ContentResponseEnricherList.Add(new BookEnricher());
+
+builder.Services.AddSingleton(filterOptions);
+
 
 builder.Services.AddApiVersioning();    
 //var connection =  Configuration["SqlConection: SqlConectionString"];
@@ -28,7 +37,7 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
 app.MapControllers();
 
 app.Run();

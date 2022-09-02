@@ -1,5 +1,6 @@
 using CursoApiRestfull.Business;
 using CursoApiRestfull.Data.VO;
+using CursoApiRestfull.Hypermedia.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CursoApiRestfull.Controllers
@@ -18,12 +19,14 @@ namespace CursoApiRestfull.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long Id)
         {
             var person = _personBusiness.FindById(Id);   
@@ -35,6 +38,7 @@ namespace CursoApiRestfull.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
@@ -42,6 +46,7 @@ namespace CursoApiRestfull.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();

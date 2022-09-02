@@ -3,7 +3,7 @@ using CursoApiRestfull.Model;
 
 namespace CursoApiRestfull.Data.Converter.Implementation
 {
-    public class LivroConverter : Iparser<LivroVO, Livro>, Iparser<Livro, LivroVO>
+    public class LivroConverter : IParser<LivroVO, Livro>, IParser<Livro, LivroVO>
     {
         public Livro Parse(LivroVO origin)
         {
@@ -11,15 +11,12 @@ namespace CursoApiRestfull.Data.Converter.Implementation
             return new Livro
             {
                 Id = origin.Id,
-                Titulo = origin.Titulo,
                 Autor = origin.Autor,
+                DataLancamento = origin.DataLancamento,
                 Preco = origin.Preco,
-                DataLancamento = origin.DataLancamento
-
+                Titulo = origin.Titulo
             };
         }
-
-
 
         public LivroVO Parse(Livro origin)
         {
@@ -27,10 +24,10 @@ namespace CursoApiRestfull.Data.Converter.Implementation
             return new LivroVO
             {
                 Id = origin.Id,
-                Titulo = origin.Titulo,
                 Autor = origin.Autor,
+                DataLancamento = origin.DataLancamento,
                 Preco = origin.Preco,
-                DataLancamento = origin.DataLancamento
+                Titulo = origin.Titulo
             };
         }
 
@@ -39,6 +36,7 @@ namespace CursoApiRestfull.Data.Converter.Implementation
             if (origin == null) return null;
             return origin.Select(item => Parse(item)).ToList();
         }
+
         public List<LivroVO> Parse(List<Livro> origin)
         {
             if (origin == null) return null;
